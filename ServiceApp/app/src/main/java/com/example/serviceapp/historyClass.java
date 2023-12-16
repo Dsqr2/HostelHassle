@@ -1,11 +1,11 @@
 package com.example.serviceapp;
 
-public class historyClass {
+public class HistoryClass {
     private String service;
     private String date;
     private String status;
 
-    public historyClass(String service, String date,String status) {
+    public HistoryClass(String service, String date, String status) {
         this.service=service;
         this.status=status;
         this.date=date;

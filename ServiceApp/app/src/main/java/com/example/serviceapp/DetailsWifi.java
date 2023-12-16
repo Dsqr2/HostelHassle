@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,7 +42,9 @@ public class DetailsWifi extends AppCompatActivity {
     EditText roomno, problem;
     TextView t;
     Button submit;
+    ProgressBar pb;
     SharedPreferences sp;
+//    Integer flag = 0;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,14 +61,16 @@ public class DetailsWifi extends AppCompatActivity {
         problem=findViewById(R.id.editText2);
         t=findViewById(R.id.textView);
         submit=findViewById(R.id.button);
+        pb = findViewById(R.id.pbar);
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
         sp = getSharedPreferences(getResources().getString(R.string.sharedpref).toString(),MODE_PRIVATE);
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(DetailsWifi.this, Dashboard.class);
-                startActivity(intent);
+//                Intent intent = new Intent(DetailsWifi.this, Dashboard.class);
+//                startActivity(intent);
+                finish();
             }
         });
         t.setOnClickListener(new View.OnClickListener() {
@@ -73,20 +78,24 @@ public class DetailsWifi extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(DetailsWifi.this,History.class);
                 startActivity(intent);
+                finish();
             }
         });
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                pb.setVisibility(View.VISIBLE);
                 String room = roomno.getText().toString();
                 String prblm = problem.getText().toString();
 
                 if(room.isEmpty() ) {
                     roomno.setError("This Field is Mandatory");
+                    pb.setVisibility(View.GONE);
                 }
                 if(prblm.isEmpty()) {
                     problem.setError("This Field is Mandatory");
+                    pb.setVisibility(View.GONE);
                 }
 
                 else{
@@ -96,7 +105,7 @@ public class DetailsWifi extends AppCompatActivity {
                                     Arrays.asList(sp.getString("Email",null),problem.getText().toString(),roomno.getText().toString(),"","Wifi")
                             ));
                     appendDataToSheet(body);
-                    Toast.makeText(DetailsWifi.this, "Service Registered", Toast.LENGTH_SHORT).show();
+
                     roomno.setText("");
                     problem.setText("");
 
@@ -138,10 +147,11 @@ public class DetailsWifi extends AppCompatActivity {
                     .setValueInputOption("USER_ENTERED")
                     .execute();
             Log.d(TAG, "Append result: " + result);
-            Toast.makeText(this, "Request Noted", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "Request Noted", Toast.LENGTH_SHORT).show();
         } catch (IOException e) {
             Toast.makeText(this, "Unable to send data", Toast.LENGTH_SHORT).show();
             e.printStackTrace();
+            pb.setVisibility(View.GONE);
         }
     }
     private void appendDataToSheet2(ValueRange body) {
@@ -152,10 +162,15 @@ public class DetailsWifi extends AppCompatActivity {
                     .setValueInputOption("USER_ENTERED")
                     .execute();
             Log.d(TAG, "Append result: " + result);
+            Toast.makeText(DetailsWifi.this, "Service Registered", Toast.LENGTH_SHORT).show();
 
+//            Intent intent = new Intent(DetailsWifi.this, Dashboard.class);
+//            startActivity(intent);
+            finish();
         } catch (IOException e) {
 
             e.printStackTrace();
+            pb.setVisibility(View.GONE);
         }
     }
 }

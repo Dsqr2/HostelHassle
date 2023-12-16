@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,7 +42,9 @@ public class ComplaintMess extends AppCompatActivity {
     EditText problem;
     TextView t;
     Button submit;
+    ProgressBar pb;
     SharedPreferences sp;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +59,7 @@ public class ComplaintMess extends AppCompatActivity {
         b=findViewById(R.id.back);
         problem=findViewById(R.id.editText2);
         t=findViewById(R.id.textView);
+        pb = findViewById(R.id.pbar);
         submit=findViewById(R.id.button);
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
@@ -63,15 +67,16 @@ public class ComplaintMess extends AppCompatActivity {
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ComplaintMess.this, Dashboard.class);
-                startActivity(intent);
+//                Intent intent = new Intent(ComplaintMess.this, Dashboard.class);
+//                startActivity(intent);
+                finish();
             }
         });
 
         t.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent =new Intent(ComplaintMess.this,History.class);
+                Intent intent = new Intent(ComplaintMess.this,History.class);
                 startActivity(intent);
             }
         });
@@ -79,11 +84,12 @@ public class ComplaintMess extends AppCompatActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                pb.setVisibility(View.VISIBLE);
                 String prblm = problem.getText().toString();
 
                 if(prblm.isEmpty()) {
                     problem.setError("This Field is Mandatory");
+                    pb.setVisibility(View.GONE);
                 }
 
                 else{
@@ -133,10 +139,11 @@ public class ComplaintMess extends AppCompatActivity {
                     .setValueInputOption("USER_ENTERED")
                     .execute();
             Log.d(TAG, "Append result: " + result);
-            Toast.makeText(this, "Request Noted", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "Request Noted", Toast.LENGTH_SHORT).show();
         } catch (IOException e) {
             Toast.makeText(this, "Unable to send data", Toast.LENGTH_SHORT).show();
             e.printStackTrace();
+            pb.setVisibility(View.GONE);
         }
     }
     private void appendDataToSheet2(ValueRange body) {
@@ -147,10 +154,12 @@ public class ComplaintMess extends AppCompatActivity {
                     .setValueInputOption("USER_ENTERED")
                     .execute();
             Log.d(TAG, "Append result: " + result);
+            Toast.makeText(ComplaintMess.this, "Service Registered", Toast.LENGTH_SHORT).show();
+            finish();
 
         } catch (IOException e) {
-
             e.printStackTrace();
+            pb.setVisibility(View.GONE);
         }
     }
 }

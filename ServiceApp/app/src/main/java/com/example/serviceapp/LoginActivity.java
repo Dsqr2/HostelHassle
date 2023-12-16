@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.google.android.material.button.MaterialButton;
@@ -29,6 +30,7 @@ public class LoginActivity extends AppCompatActivity
     MaterialButton loginbtn;
     SharedPreferences sp;
     List<List<Object>> rows2;
+    ProgressBar pb;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -43,6 +45,8 @@ public class LoginActivity extends AppCompatActivity
         password = findViewById(R.id.password);
         sp = getSharedPreferences(getResources().getString(R.string.sharedpref).toString(),MODE_PRIVATE);
         loginbtn = findViewById(R.id.loginbtn);
+        pb = findViewById(R.id.pbar);
+
 //        rows2.get(0).get(1);
         if(sp.getString("islogin","false").equals("true")){
             Intent intent = new Intent(LoginActivity.this, Dashboard.class);
@@ -65,6 +69,7 @@ public class LoginActivity extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
+                pb.setVisibility(View.VISIBLE);
                 if(!email.getText().toString().equals("") && !password.getText().toString().equals("")) {
                     readDataFromGoogleSheet();
                 }
@@ -72,11 +77,13 @@ public class LoginActivity extends AppCompatActivity
                 {
                     //error
                     email.setError("This Field is Mandatory");
+                    pb.setVisibility(View.GONE);
                 }
                 if(password.getText().toString().equals(""))
                 {
                     //error
                     password.setError("This Field is Mandatory");
+                    pb.setVisibility(View.GONE);
                 }
 
 
@@ -87,7 +94,8 @@ public class LoginActivity extends AppCompatActivity
     {
         String spreadsheetId = "1Gw2MFn-NokjkOA_M995-mVPonGhBK1eqADsnIHl399g";
         String range = "Sheet1!A:Z";
-        String apiKey = "AIzaSyAtB0JJF5JEcr3gCW6W_wz2AHgtBYhGBmk";
+        String apiKey = "AIzaSyCYfMod_Z3F_hws1e---nZ8h6QGcyEd-jw";
+//        AIzaSyAtB0JJF5JEcr3gCW6W_wz2AHgtBYhGBmk
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://sheets.googleapis.com/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -130,6 +138,7 @@ public class LoginActivity extends AppCompatActivity
                 if(flag == 0)
                 {
                     Toast.makeText(LoginActivity.this, "Incorrect Credentials", Toast.LENGTH_SHORT).show();
+                    pb.setVisibility(View.GONE);
                 }
 
 
@@ -147,6 +156,7 @@ public class LoginActivity extends AppCompatActivity
             @Override
             public void onFailure(@NonNull Call<ValueRange> call, @NonNull Throwable t) {
                 Toast.makeText(LoginActivity.this, "Unable to fetch data", Toast.LENGTH_SHORT).show();
+                pb.setVisibility(View.GONE);
                 // Handle error
             }
         });

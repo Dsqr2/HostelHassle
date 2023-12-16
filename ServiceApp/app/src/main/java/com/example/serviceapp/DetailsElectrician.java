@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,6 +42,7 @@ public class DetailsElectrician extends AppCompatActivity {
     EditText roomno, problem, bed;
     TextView t;
     Button submit;
+    ProgressBar pb;
     SharedPreferences sp;
     @SuppressLint("MissingInflatedId")
     @Override
@@ -59,14 +61,16 @@ public class DetailsElectrician extends AppCompatActivity {
         bed=findViewById(R.id.editText3);
         t=findViewById(R.id.textView);
         submit=findViewById(R.id.button);
+        pb = findViewById(R.id.pbar);
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
         sp = getSharedPreferences(getResources().getString(R.string.sharedpref).toString(),MODE_PRIVATE);
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(DetailsElectrician.this, Dashboard.class);
-                startActivity(intent);
+//                Intent intent = new Intent(DetailsElectrician.this, Dashboard.class);
+//                startActivity(intent);
+                finish();
             }
         });
 
@@ -74,18 +78,22 @@ public class DetailsElectrician extends AppCompatActivity {
             @SuppressLint("SuspiciousIndentation")
             @Override
             public void onClick(View v) {
+                pb.setVisibility(View.VISIBLE);
                 String room = roomno.getText().toString();
                 String prblm = problem.getText().toString();
                 String bedno = bed.getText().toString();
 
                 if(room.isEmpty()) {
                     roomno.setError("This Field is Mandatory");
+                    pb.setVisibility(View.GONE);
                 }
                 if(prblm.isEmpty()) {
                     problem.setError("This Field is Mandatory");
+                    pb.setVisibility(View.GONE);
                 }
                 if(bedno.isEmpty()) {
                     bed.setError("This Field is Mandatory");
+                    pb.setVisibility(View.GONE);
                 }
                 else{
                     createSheetsService();
@@ -94,7 +102,7 @@ public class DetailsElectrician extends AppCompatActivity {
                                     Arrays.asList(sp.getString("Email",null),problem.getText().toString(),roomno.getText().toString(),bed.getText().toString(),"Electrician")
                             ));
                     appendDataToSheet(body);
-                    Toast.makeText(DetailsElectrician.this, "Service Registered", Toast.LENGTH_SHORT).show();
+
                     roomno.setText("");
                     bed.setText("");
                     problem.setText("");
@@ -144,10 +152,11 @@ public class DetailsElectrician extends AppCompatActivity {
                     .setValueInputOption("USER_ENTERED")
                     .execute();
             Log.d(TAG, "Append result: " + result);
-            Toast.makeText(this, "Request Noted", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "Request Noted", Toast.LENGTH_SHORT).show();
         } catch (IOException e) {
             Toast.makeText(this, "Unable to send data", Toast.LENGTH_SHORT).show();
             e.printStackTrace();
+            pb.setVisibility(View.GONE);
         }
     }
     private void appendDataToSheet2(ValueRange body) {
@@ -158,10 +167,13 @@ public class DetailsElectrician extends AppCompatActivity {
                     .setValueInputOption("USER_ENTERED")
                     .execute();
             Log.d(TAG, "Append result: " + result);
+            Toast.makeText(DetailsElectrician.this, "Service Registered", Toast.LENGTH_SHORT).show();
+            finish();
 
         } catch (IOException e) {
 
             e.printStackTrace();
+            pb.setVisibility(View.GONE);
         }
     }
 }

@@ -1,7 +1,5 @@
 package com.example.serviceapp;
 
-import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,28 +7,15 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.StrictMode;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.WindowManager;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.api.client.extensions.android.http.AndroidHttp;
-import com.google.api.client.googleapis.auth.oauth2.GoogleCredential;
-import com.google.api.client.http.HttpTransport;
-import com.google.api.client.json.JsonFactory;
-import com.google.api.client.json.jackson2.JacksonFactory;
-import com.google.api.services.sheets.v4.Sheets;
-import com.google.api.services.sheets.v4.SheetsScopes;
-import com.google.api.services.sheets.v4.model.AppendValuesResponse;
 import com.google.api.services.sheets.v4.model.ValueRange;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import retrofit2.Call;
@@ -43,7 +28,7 @@ public class History extends AppCompatActivity {
     ListView ls;
     BottomNavigationView bottomNavigationView;
     SharedPreferences sp;
-    ArrayList<historyClass> a=new ArrayList<historyClass>();
+    ArrayList<HistoryClass> a=new ArrayList<HistoryClass>();
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -60,17 +45,6 @@ public class History extends AppCompatActivity {
 
 
         readDataFromGoogleSheet();
-//        a.add(new historyClass("Wifi Service","13/03/2023","Pending"));
-//        a.add(new historyClass("Wifi Service","13/03/2023","Pending"));
-//        a.add(new historyClass("Wifi Service","13/03/2023","Pending"));
-//        a.add(new historyClass("Wifi Service","13/03/2023","Pending"));
-//        a.add(new historyClass("Wifi Service","13/03/2023","Pending"));
-//        a.add(new historyClass("Wifi Service","13/03/2023","Pending"));
-//        a.add(new historyClass("Wifi Service","13/03/2023","Pending"));
-//        a.add(new historyClass("Wifi Service","13/03/2023","Pending"));
-//        a.add(new historyClass("Wifi Service","13/03/2023","Pending"));
-//        a.add(new historyClass("Wifi Service","13/03/2023","Pending"));
-//        a.add(new historyClass("Wifi Service","13/03/2023","Pending"));
 
 
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
@@ -136,9 +110,15 @@ public class History extends AppCompatActivity {
                 List<List<Object>> rows = values.getValues();
                 System.out.println(rows);
 
-                for(int i=1;rows.size()>i;i++){
+                for(int i=1;rows.size()>i;i++)
+                {
+                    sp = getSharedPreferences(getResources().getString(R.string.sharedpref).toString(),MODE_PRIVATE);
+                    if(sp.getString("Email","").equals(rows.get(i).get(0).toString()))
+                    {
+//                        Toast.makeText(History.this, rows.get(i).get(0).toString(), Toast.LENGTH_SHORT).show();
+                        a.add(new HistoryClass(rows.get(i).get(1).toString(),rows.get(i).get(2).toString(),rows.get(i).get(3).toString()));
+                    }
 
-                    a.add(new historyClass(rows.get(i).get(1).toString(),rows.get(i).get(2).toString(),rows.get(i).get(3).toString()));
 
                 }
                 CustomAdapter ca=new CustomAdapter(History.this,R.layout.listview,a);

@@ -102,5 +102,12 @@
 
     </TextView>
 
+    <ProgressBar
+        android:id="@+id/pbar"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_centerInParent="true"
+        android:indeterminateTint="#6672ff"
+        android:visibility="gone"/>
 
 </RelativeLayout>

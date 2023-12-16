@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,6 +41,7 @@ public class DetailsPlumber extends AppCompatActivity {
     EditText washno, problem, roomno;
     TextView t;
     Button submit;
+    ProgressBar pb;
     SharedPreferences sp;
     @SuppressLint("MissingInflatedId")
     @Override
@@ -57,6 +59,7 @@ public class DetailsPlumber extends AppCompatActivity {
         problem=findViewById(R.id.editText2);
         roomno = findViewById(R.id.editText);
         t=findViewById(R.id.textView);
+        pb = findViewById(R.id.pbar);
         submit=findViewById(R.id.button);
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
@@ -64,8 +67,9 @@ public class DetailsPlumber extends AppCompatActivity {
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(DetailsPlumber.this, Dashboard.class);
-                startActivity(intent);
+//                Intent intent = new Intent(DetailsPlumber.this, Dashboard.class);
+//                startActivity(intent);
+                finish();
             }
         });
 
@@ -73,14 +77,17 @@ public class DetailsPlumber extends AppCompatActivity {
             @SuppressLint("SuspiciousIndentation")
             @Override
             public void onClick(View v) {
+                pb.setVisibility(View.VISIBLE);
                 String wash = washno.getText().toString();
                 String prblm = problem.getText().toString();
 
                 if(wash.isEmpty()) {
                     washno.setError("This Field is Mandatory");
+                    pb.setVisibility(View.GONE);
                 }
                 if(prblm.isEmpty()) {
                     problem.setError("This Field is Mandatory");
+                    pb.setVisibility(View.GONE);
                 }
                 else{
                     createSheetsService();
@@ -89,7 +96,7 @@ public class DetailsPlumber extends AppCompatActivity {
                                     Arrays.asList(sp.getString("Email",null),problem.getText().toString(),roomno.getText().toString(),"","Plumber",washno.getText().toString())
                             ));
                     appendDataToSheet(body);
-                    Toast.makeText(DetailsPlumber.this, "Service Registered", Toast.LENGTH_SHORT).show();
+
                     roomno.setText("");
                     washno.setText("");
                     problem.setText("");
@@ -138,10 +145,11 @@ public class DetailsPlumber extends AppCompatActivity {
                     .setValueInputOption("USER_ENTERED")
                     .execute();
             Log.d(TAG, "Append result: " + result);
-            Toast.makeText(this, "Request Noted", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "Request Noted", Toast.LENGTH_SHORT).show();
         } catch (IOException e) {
             Toast.makeText(this, "Unable to send data", Toast.LENGTH_SHORT).show();
             e.printStackTrace();
+            pb.setVisibility(View.GONE);
         }
     }
     private void appendDataToSheet2(ValueRange body) {
@@ -152,10 +160,13 @@ public class DetailsPlumber extends AppCompatActivity {
                     .setValueInputOption("USER_ENTERED")
                     .execute();
             Log.d(TAG, "Append result: " + result);
+            Toast.makeText(DetailsPlumber.this, "Service Registered", Toast.LENGTH_SHORT).show();
+            finish();
 
         } catch (IOException e) {
 
             e.printStackTrace();
+            pb.setVisibility(View.GONE);
         }
     }
 

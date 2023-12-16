@@ -151,4 +151,12 @@
         android:letterSpacing="0.05"
         android:textColor="@color/black"
         android:textSize="14dp" />
+
+    <ProgressBar
+        android:id="@+id/pbar"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_centerInParent="true"
+        android:indeterminateTint="#6672ff"
+        android:visibility="gone" />
 </RelativeLayout>

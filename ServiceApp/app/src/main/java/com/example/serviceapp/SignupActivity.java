@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,6 +48,7 @@ public class SignupActivity extends AppCompatActivity {
     EditText cpassword;
     MaterialButton signupbtn;
     TextView loginbtn;
+    ProgressBar pb;
     List<List<Object>> rows2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,25 +65,32 @@ public class SignupActivity extends AppCompatActivity {
         cpassword = findViewById(R.id.cpassword);
         signupbtn = findViewById(R.id.signupbtn);
         loginbtn = findViewById(R.id.loginbtn);
+        pb = findViewById(R.id.pbar);
         createSheetsService();
 
         signupbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                pb.setVisibility(View.VISIBLE);
                 if (name.getText().toString().equals("")) {
                     name.setError("This Field is Mandatory");
+                    pb.setVisibility(View.GONE);
                 }
                 if (email.getText().toString().equals("")) {
                     email.setError("This Field is Mandatory");
+                    pb.setVisibility(View.GONE);
                 }
                 if (contact.getText().toString().equals("")) {
                     contact.setError("This Field is Mandatory");
+                    pb.setVisibility(View.GONE);
                 }
                 if (password.getText().toString().equals("")) {
                     password.setError("This Field is Mandatory");
+                    pb.setVisibility(View.GONE);
                 }
                 if (cpassword.getText().toString().equals("")) {
                     cpassword.setError("This Field is Mandatory");
+                    pb.setVisibility(View.GONE);
                 }
 
                 else if (password.getText().toString().equals(cpassword.getText().toString()))
@@ -96,13 +105,6 @@ public class SignupActivity extends AppCompatActivity {
                     cpassword.setError("Check Password");
                 }
 
-                if(password.getText().toString().equals(cpassword.getText().toString())) {
-                    ValueRange body = new ValueRange()
-                            .setValues(Arrays.asList(
-                                    Arrays.asList(email.getText().toString(), name.getText().toString(), contact.getText().toString(), password.getText().toString())
-                            ));
-                    appendDataToSheet(body);
-                }
             }
         });
 
@@ -142,6 +144,7 @@ public class SignupActivity extends AppCompatActivity {
                     .setValueInputOption("USER_ENTERED")
                     .execute();
             Log.d(TAG, "Append result: " + result);
+            Toast.makeText(SignupActivity.this, "Account Created", Toast.LENGTH_SHORT).show();
 
         } catch (IOException e) {
             Toast.makeText(this, "Unable to send data", Toast.LENGTH_SHORT).show();
@@ -163,7 +166,8 @@ public class SignupActivity extends AppCompatActivity {
         sheetsService = retrofit.create(SheetsService.class);
 
         Call<ValueRange> call = sheetsService.getValues(spreadsheetId, range, apiKey);
-        call.enqueue(new Callback<ValueRange>() {
+        call.enqueue(new Callback<ValueRange>()
+        {
             @Override
             public void onResponse(@NonNull Call<ValueRange> call, @NonNull Response<ValueRange> response)
             {
@@ -173,7 +177,7 @@ public class SignupActivity extends AppCompatActivity {
                 List<List<Object>> rows = values.getValues();
                 System.out.println(rows);
                 rows2=rows;
-
+                int flag = 0;
                 if (password.getText().toString().equals(cpassword.getText().toString()))
                 {
                     for(int i=0; i<rows2.size(); i++)
@@ -181,19 +185,37 @@ public class SignupActivity extends AppCompatActivity {
                         if(email.getText().toString().equals(rows2.get(i).get(0).toString())
                                 || contact.getText().toString().equals(rows2.get(i).get(2).toString()) )
                         {
+                            flag = 1;
                             Toast.makeText(SignupActivity.this, "Existing User", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
+                            startActivity(intent);
                             break;
                         }
 
                     }
+                    if(flag == 0)
+                    {
+                        ValueRange body = new ValueRange()
+                                .setValues(Arrays.asList(
+                                        Arrays.asList(email.getText().toString(), name.getText().toString(), contact.getText().toString(), password.getText().toString())
+                                ));
+                        appendDataToSheet(body);
 
+                        Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
+                        startActivity(intent);
+                    }
                 }
-                else
-                {
-                    Toast.makeText(SignupActivity.this, "Account Created", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
-                    startActivity(intent);
-                }
+//                if(flag == 0)
+//                {
+//                    ValueRange body = new ValueRange()
+//                            .setValues(Arrays.asList(
+//                                    Arrays.asList(email.getText().toString(), name.getText().toString(), contact.getText().toString(), password.getText().toString())
+//                            ));
+//                    appendDataToSheet(body);
+//
+//                    Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
+//                    startActivity(intent);
+//                }
 
 
 

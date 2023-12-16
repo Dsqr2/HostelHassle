@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,6 +40,7 @@ public class LostFound extends AppCompatActivity {
     EditText roomno, item, description;
     TextView t;
     Button submit;
+    ProgressBar pb;
     BottomNavigationView bottomNavigationView;
     SharedPreferences sp;
     @SuppressLint("MissingInflatedId")
@@ -57,6 +59,7 @@ public class LostFound extends AppCompatActivity {
         description=findViewById(R.id.editText2);
         item=findViewById(R.id.editText3);
         t=findViewById(R.id.textView);
+        pb=findViewById(R.id.pbar);
         submit=findViewById(R.id.button);
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
@@ -65,18 +68,22 @@ public class LostFound extends AppCompatActivity {
             @SuppressLint("SuspiciousIndentation")
             @Override
             public void onClick(View v) {
+                pb.setVisibility(View.VISIBLE);
                 String room = roomno.getText().toString();
                 String des = description.getText().toString();
                 String itm = item.getText().toString();
 
                 if(room.isEmpty()) {
                     roomno.setError("This Field is Mandatory");
+                    pb.setVisibility(View.GONE);
                 }
                 if(des.isEmpty()) {
                     description.setError("This Field is Mandatory");
+                    pb.setVisibility(View.GONE);
                 }
                 if(itm.isEmpty()) {
                     item.setError("This Field is Mandatory");
+                    pb.setVisibility(View.GONE);
                 }
                 else{
                     createSheetsService();
@@ -85,7 +92,7 @@ public class LostFound extends AppCompatActivity {
                                     Arrays.asList(sp.getString("Email",null),"",roomno.getText().toString(),"","Lost","",item.getText().toString(),description.getText().toString())
                             ));
                     appendDataToSheet(body);
-                    Toast.makeText(LostFound.this, "Service Registered", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(LostFound.this, "Service Registered", Toast.LENGTH_SHORT).show();
                     roomno.setText("");
                     description.setText("");
                     item.setText("");
@@ -166,10 +173,14 @@ public class LostFound extends AppCompatActivity {
                     .setValueInputOption("USER_ENTERED")
                     .execute();
             Log.d(TAG, "Append result: " + result);
+            Toast.makeText(LostFound.this, "Service Registered", Toast.LENGTH_SHORT).show();
             Toast.makeText(this, "Request Noted", Toast.LENGTH_SHORT).show();
+            pb.setVisibility(View.GONE);
+//            finish();
         } catch (IOException e) {
             Toast.makeText(this, "Unable to send data", Toast.LENGTH_SHORT).show();
             e.printStackTrace();
+            pb.setVisibility(View.GONE);
         }
     }
 }

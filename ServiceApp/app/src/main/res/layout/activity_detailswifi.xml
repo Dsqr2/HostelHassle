@@ -20,19 +20,6 @@
         app:layout_constraintVertical_bias="0.831"
         tools:ignore="InvalidId" />
 
-    <View
-        android:layout_width="35dp"
-        android:id="@+id/back"
-        android:layout_height="30dp"
-        android:background="@drawable/ic_baseline_arrow_back_24"
-        app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.067"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.305"
-        tools:ignore="InvalidId" />
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="300dp"
@@ -178,6 +165,30 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
         app:layout_constraintVertical_bias="0.147" />
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:indeterminateTint="#6672ff"
+        android:visibility="gone"
+        android:id="@+id/pbar"/>
+
+    <View
+        android:layout_width="35dp"
+        android:id="@+id/back"
+        android:layout_height="30dp"
+        android:background="@drawable/ic_baseline_arrow_back_24"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.067"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.305"
+        tools:ignore="InvalidId" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

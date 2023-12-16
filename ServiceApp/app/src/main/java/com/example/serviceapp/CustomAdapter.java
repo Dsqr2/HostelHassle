@@ -9,17 +9,17 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class CustomAdapter extends ArrayAdapter<historyClass> {
+public class CustomAdapter extends ArrayAdapter<HistoryClass> {
     private final Context mContext;
     private final int mResource;
-    ArrayList<historyClass> mobjects;
+    ArrayList<HistoryClass> mobjects;
     private int lastPosition = -1;
     private static class ViewHolder {
         TextView service;
         TextView status;
         TextView date;
     }
-    public CustomAdapter(Context context, int resource, ArrayList<historyClass> objects) {
+    public CustomAdapter(Context context, int resource, ArrayList<HistoryClass> objects) {
         super(context, resource, objects);
         mContext = context;
         mResource = resource;
@@ -33,7 +33,7 @@ public class CustomAdapter extends ArrayAdapter<historyClass> {
         String status = getItem(position).getStatus();
 
         //Create the person object with the information
-        historyClass rclass = new historyClass(service,date,status);
+        HistoryClass rclass = new HistoryClass(service,date,status);
 
         //create the view result for showing the animation
         final View result;

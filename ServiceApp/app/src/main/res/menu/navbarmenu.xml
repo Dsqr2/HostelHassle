@@ -4,7 +4,7 @@
 
     <item android:title="@string/home"
         android:icon="@drawable/ic_baseline_home_24"
-        android:id="@+id/homepage" />
+        android:id="@+id/homepage"  />
 
     <item android:title="@string/lost"
         android:icon="@drawable/ic_baseline_add_reaction_24"

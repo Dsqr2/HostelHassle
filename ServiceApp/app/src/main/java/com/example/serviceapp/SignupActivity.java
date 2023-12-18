@@ -11,6 +11,7 @@ import android.os.StrictMode;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -46,7 +47,7 @@ public class SignupActivity extends AppCompatActivity {
     EditText contact;
     EditText password;
     EditText cpassword;
-    MaterialButton signupbtn;
+    Button signupbtn;
     TextView loginbtn;
     ProgressBar pb;
     List<List<Object>> rows2;

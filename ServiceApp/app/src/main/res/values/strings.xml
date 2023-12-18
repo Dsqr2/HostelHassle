@@ -1,9 +1,8 @@
 <resources>
     <string name="app_name">ServiceApp</string>
     <string name="welcome">Welcome! 😃</string>
-    <string name="name">Pratyush Mahajan</string>
     <string name="service">Choose Service</string>
-    <string name="complaint">Any Complaints ?</string>
+    <string name="complaint">Any Complaints?</string>
     <string name="wifi">Wifi</string>
     <string name="plumber">Plumber</string>
     <string name="elctric">Electrician</string>
@@ -30,8 +29,6 @@
     <string name="mess_complaint">Mess Complaint</string>
     <string name="drinking_water_complaint">Drinking Water Complaint</string>
     <string name="any_other_complaint">Any Other Complaint</string>
-    <string name="tab_text_1">Tab 1</string>
-    <string name="tab_text_2">Tab 2</string>
     <string name="my_profile">My Profile</string>
     <string name="my_name">My Name</string>
     <string name="my_mail">My Mail</string>
@@ -41,11 +38,10 @@
     <string name="item">Item</string>
     <string name="where_s_my_thing">Where\'s My Thing</string>
     <string name="my_service">My Service</string>
-    <string name="complaint_date">Complaint Date - </string>
-    <string name="status">Status - </string>
-    <string name="date">Date - </string>
+    <string name="status">Status: </string>
+    <string name="date">Date: </string>
     <string name="pending">Pending</string>
-    <string name="datenew">12/12/2023</string>
+    <string name="datenew"> 12/12/2023</string>
     <string name="my_complaints">My Complaints</string>
     <string name="email">Email</string>
     <string name="create_account">Create Account</string>
@@ -53,5 +49,6 @@
     <string name="email2">Email</string>
     <string name="sharedpref">sharedp</string>
     <string name="hh">Hostel Hassle</string>
+    <string name="hostel_hassle">HOSTEL HASSLE</string>
 
 </resources>

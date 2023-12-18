@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".DetailsWifi"
-    android:background="@drawable/bgpic">
+    android:background="@drawable/bg_gradient6">
 
     <View
         android:id="@+id/hist"
@@ -14,16 +14,16 @@
         android:background="@drawable/ic_baseline_history_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.511"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.831"
+        app:layout_constraintVertical_bias="0.874"
         tools:ignore="InvalidId" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="300dp"
-        android:layout_height="350dp"
+        android:layout_height="400dp"
         android:background="@drawable/bg_gradient3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -51,7 +51,7 @@
                 android:id="@+id/editText"
                 android:layout_width="250dp"
                 android:layout_height="65dp"
-                android:fontFamily="@font/roboto_medium"
+                android:fontFamily="@font/poppins"
                 android:hint="@string/roomno"
                 android:inputType="number"
                 tools:ignore="MissingConstraints" />
@@ -62,7 +62,7 @@
 
             android:id="@+id/textInputLayout"
             android:layout_width="250dp"
-            android:layout_height="65dp"
+            android:layout_height="wrap_content"
             android:backgroundTint="@color/white"
             app:boxBackgroundColor="@color/white"
             app:hintAnimationEnabled="true"
@@ -79,7 +79,8 @@
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:fontFamily="@font/roboto_medium"
+                android:fontFamily="@font/poppins"
+                android:maxLines="7"
                 android:gravity="start|top"
                 android:hint="@string/prblm"
                 android:inputType="textMultiLine"
@@ -89,9 +90,14 @@
 
         <Button
             android:id="@+id/button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/button_boundary"
+            android:layout_width="250dp"
+            android:layout_height="72dp"
+            android:letterSpacing="0.05"
+            app:cornerRadius="20dp"
+            android:textAllCaps="false"
+            android:fontFamily="@font/poppins"
+            android:textSize="20dp"
+            android:backgroundTint="#DC616B"
             android:text="@string/submit"
             android:textStyle="bold"
             android:textColor="@color/white"
@@ -106,7 +112,7 @@
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto_medium"
+            android:fontFamily="@font/poppins_medium"
             android:gravity="center"
             android:letterSpacing="0.07"
             android:text="@string/info"
@@ -124,7 +130,7 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/roboto_medium"
+        android:fontFamily="@font/poppins_medium"
         android:gravity="center"
         android:letterSpacing="0.02"
         android:text="@string/wifi_service"
@@ -132,10 +138,10 @@
         android:textSize="26dp"
         app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.518"
+        app:layout_constraintHorizontal_bias="0.519"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.703" />
+        app:layout_constraintVertical_bias="0.884" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -153,18 +159,18 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/roboto"
+        android:fontFamily="@font/poppins"
         android:letterSpacing="0.04"
         android:text="@string/show_my_complaints"
-        android:textSize="14dp"
         android:textColor="@color/black"
+        android:textSize="18dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.516"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
-        app:layout_constraintVertical_bias="0.147" />
+        app:layout_constraintVertical_bias="0.186" />
 
     <ProgressBar
         android:layout_width="wrap_content"

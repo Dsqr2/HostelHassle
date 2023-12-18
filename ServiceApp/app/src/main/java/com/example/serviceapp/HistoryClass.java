@@ -10,7 +10,6 @@ public class HistoryClass {
         this.status=status;
         this.date=date;
 
-
     }
 
     public String getDate() {

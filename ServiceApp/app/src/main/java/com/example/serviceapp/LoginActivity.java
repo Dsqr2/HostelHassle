@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -27,7 +28,7 @@ public class LoginActivity extends AppCompatActivity
     TextView createaccount;
     EditText email;
     EditText password;
-    MaterialButton loginbtn;
+    Button loginbtn;
     SharedPreferences sp;
     List<List<Object>> rows2;
     ProgressBar pb;

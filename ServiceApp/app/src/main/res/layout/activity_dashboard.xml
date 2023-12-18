@@ -34,10 +34,10 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginLeft="5dp"
-                    android:fontFamily="@font/roboto_bold"
+                    android:fontFamily="@font/poppins_bold"
                     android:text="Dashboard"
                     android:textColor="@color/black"
-                    android:textSize="26dp" />
+                    android:textSize="25dp" />
 
                 <View
                     android:layout_width="50dp"
@@ -48,8 +48,8 @@
 
 
                 <View
-                    android:layout_width="40dp"
                     android:id="@+id/logout"
+                    android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:layout_marginLeft="95dp"
@@ -75,7 +75,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/roboto_medium"
+                        android:fontFamily="@font/poppins_medium"
                         android:text="@string/welcome"
                         android:textColor="#ffff"
                         android:textSize="24dp" />
@@ -91,7 +91,7 @@
                             android:id="@+id/name"
                             android:layout_width="259dp"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/roboto_medium"
+                            android:fontFamily="@font/poppins_medium"
                             android:textColor="#ffff"
                             android:textSize="24dp" />
 
@@ -120,7 +120,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:fontFamily="@font/roboto_medium"
+                    android:fontFamily="@font/poppins_medium"
                     android:text="@string/service"
                     android:textColor="#5E5E5E"
                     android:textSize="18dp" />
@@ -163,7 +163,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/roboto_bold"
+                            android:fontFamily="@font/poppins_bold"
                             android:text="@string/wifi"
                             android:textColor="#9C000000"
                             android:textSize="18dp" />
@@ -205,7 +205,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/roboto_bold"
+                            android:fontFamily="@font/poppins_bold"
                             android:text="@string/carp"
                             android:textColor="#9C000000"
                             android:textSize="18dp" />
@@ -257,7 +257,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/roboto_bold"
+                            android:fontFamily="@font/poppins_bold"
                             android:text="@string/elctric"
                             android:textColor="#9C000000"
                             android:textSize="18dp" />
@@ -297,7 +297,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/roboto_bold"
+                            android:fontFamily="@font/poppins_bold"
                             android:text="@string/plumber"
                             android:textColor="#9C000000"
                             android:textSize="18dp" />
@@ -332,7 +332,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:fontFamily="@font/roboto_medium"
+                    android:fontFamily="@font/poppins_medium"
                     android:text="@string/complaint"
                     android:textColor="#5E5E5E"
                     android:textSize="18dp" />
@@ -373,7 +373,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/roboto_bold"
+                            android:fontFamily="@font/poppins_bold"
                             android:text="@string/food"
                             android:textColor="#9C000000"
                             android:textSize="18dp" />
@@ -414,7 +414,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/roboto_bold"
+                            android:fontFamily="@font/poppins_bold"
                             android:text="@string/room"
                             android:textColor="#9C000000"
                             android:textSize="18dp" />
@@ -465,7 +465,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/roboto_bold"
+                            android:fontFamily="@font/poppins_bold"
                             android:text="@string/drinking_water"
                             android:textColor="#9C000000"
                             android:textSize="18dp" />
@@ -508,7 +508,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/roboto_bold"
+                            android:fontFamily="@font/poppins_bold"
                             android:text="@string/others"
                             android:textColor="#9C000000"
                             android:textSize="18dp" />

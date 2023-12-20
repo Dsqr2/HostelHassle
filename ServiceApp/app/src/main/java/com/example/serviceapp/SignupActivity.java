@@ -233,6 +233,7 @@ public class SignupActivity extends AppCompatActivity {
             @Override
             public void onFailure(@NonNull Call<ValueRange> call, @NonNull Throwable t) {
                 Toast.makeText(SignupActivity.this, "Unable to fetch data", Toast.LENGTH_SHORT).show();
+                pb.setVisibility(View.GONE);
                 // Handle error
             }
         });

@@ -8,8 +8,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -27,6 +29,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class History extends AppCompatActivity {
     ListView ls;
     BottomNavigationView bottomNavigationView;
+    ProgressBar pb;
     SharedPreferences sp;
     ArrayList<HistoryClass> a=new ArrayList<HistoryClass>();
 
@@ -40,10 +43,11 @@ public class History extends AppCompatActivity {
 
         bottomNavigationView=findViewById(R.id.bottom_nav);
         bottomNavigationView.setSelectedItemId(R.id.history);
+        pb=findViewById(R.id.pbar);
         sp=getSharedPreferences(getResources().getString(R.string.sharedpref),MODE_PRIVATE);
         ls=findViewById(R.id.ls);
 
-
+        pb.setVisibility(View.VISIBLE);
         readDataFromGoogleSheet();
 
 
@@ -118,11 +122,14 @@ public class History extends AppCompatActivity {
 //                        Toast.makeText(History.this, rows.get(i).get(0).toString(), Toast.LENGTH_SHORT).show();
                         a.add(new HistoryClass(rows.get(i).get(1).toString(),rows.get(i).get(2).toString(),rows.get(i).get(3).toString()));
                     }
-
-
+                }
+                if(a.size() == 0)
+                {
+                    a.add(new HistoryClass("No Complaints","", ""));
                 }
                 CustomAdapter ca=new CustomAdapter(History.this,R.layout.listview,a);
                 ls.setAdapter(ca);
+                pb.setVisibility(View.GONE);
             }
 
             @Override
@@ -131,7 +138,5 @@ public class History extends AppCompatActivity {
                 // Handle error
             }
         });
-
-
     }
 }
